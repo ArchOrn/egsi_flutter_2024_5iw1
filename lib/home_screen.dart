@@ -9,6 +9,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  Color _color = Colors.red;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,8 +27,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       backgroundColor: Colors.white,
-      body: const Center(
-        child: Square(),
+      body: Center(
+        child: Square(
+          color: _color,
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const [
@@ -42,7 +46,11 @@ class _HomeScreenState extends State<HomeScreen> {
         selectedItemColor: Colors.blue,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          setState(() {
+            _color = _color == Colors.red ? Colors.blue : Colors.red;
+          });
+        },
         backgroundColor: Colors.blue,
         shape: const CircleBorder(),
         child: const Icon(
