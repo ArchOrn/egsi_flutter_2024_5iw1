@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_5iw1/calendar_screen.dart';
-import 'package:flutter_5iw1/favorites_screen.dart';
+import 'package:flutter_5iw1/square.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -10,31 +9,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final screens = [
-    ScreenDef(
-      widget: const FavoritesScreen(),
-      label: 'Favorites',
-      icon: Icons.favorite,
-    ),
-    ScreenDef(
-      widget: const CalendarScreen(),
-      label: 'Today',
-      icon: Icons.calendar_today,
-    ),
-    ScreenDef(
-      widget: Container(
-        color: Colors.purple,
-        child: const Center(
-          child: Text('Coucou'),
-        ),
-      ),
-      label: 'User',
-      icon: Icons.account_box,
-    ),
-  ];
-
-  int _currentIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,20 +25,20 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       backgroundColor: Colors.white,
-      body: screens[_currentIndex].widget,
+      body: const Center(
+        child: Square(),
+      ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        items: screens.map((e) {
-          return BottomNavigationBarItem(
-            icon: Icon(e.icon),
-            label: e.label,
-          );
-        }).toList(),
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'Favorites',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_today),
+            label: 'Today',
+          ),
+        ],
         selectedItemColor: Colors.blue,
       ),
       floatingActionButton: FloatingActionButton(
@@ -78,12 +52,4 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-}
-
-class ScreenDef {
-  final Widget widget;
-  final String label;
-  final IconData icon;
-
-  ScreenDef({required this.widget, required this.label, required this.icon});
 }
