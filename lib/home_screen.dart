@@ -15,16 +15,18 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: GestureDetector(
-          onTap: () {
-            setState(() {
-              _color = _color == Colors.red ? Colors.blue : Colors.red;
-            });
-          },
-          child: Container(
-            width: 80,
-            height: 80,
+        child: SizedBox(
+          width: 80,
+          height: 80,
+          child: Material(
             color: _color,
+            child: InkWell(
+              onTap: () {
+                setState(() {
+                  _color = _color == Colors.red ? Colors.blue : Colors.red;
+                });
+              },
+            ),
           ),
         ),
       ),
