@@ -11,8 +11,26 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final screens = [
-    const FavoritesScreen(),
-    const CalendarScreen(),
+    ScreenDef(
+      widget: const FavoritesScreen(),
+      label: 'Favorites',
+      icon: Icons.favorite,
+    ),
+    ScreenDef(
+      widget: const CalendarScreen(),
+      label: 'Today',
+      icon: Icons.calendar_today,
+    ),
+    ScreenDef(
+      widget: Container(
+        color: Colors.purple,
+        child: const Center(
+          child: Text('Coucou'),
+        ),
+      ),
+      label: 'User',
+      icon: Icons.account_box,
+    ),
   ];
 
   int _currentIndex = 0;
@@ -33,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       backgroundColor: Colors.white,
-      body: screens[_currentIndex],
+      body: screens[_currentIndex].widget,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) {
@@ -41,16 +59,12 @@ class _HomeScreenState extends State<HomeScreen> {
             _currentIndex = index;
           });
         },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Favorites',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
-            label: 'Today',
-          ),
-        ],
+        items: screens.map((e) {
+          return BottomNavigationBarItem(
+            icon: Icon(e.icon),
+            label: e.label,
+          );
+        }).toList(),
         selectedItemColor: Colors.blue,
       ),
       floatingActionButton: FloatingActionButton(
@@ -64,4 +78,12 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+}
+
+class ScreenDef {
+  final Widget widget;
+  final String label;
+  final IconData icon;
+
+  ScreenDef({required this.widget, required this.label, required this.icon});
 }
