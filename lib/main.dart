@@ -14,17 +14,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: const HomeScreen(),
       theme: ThemeData(
-        textTheme: const TextTheme(
-          displayMedium: TextStyle(
-            color: Colors.amber,
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-          ),
-          bodySmall: TextStyle(
-            color: Colors.black,
-            fontSize: 12,
-          ),
-        ),
+        useMaterial3: true,
       ),
     );
   }
