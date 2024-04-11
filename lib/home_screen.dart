@@ -9,7 +9,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Color _color = Colors.red;
+  Color _backgroundColor = Colors.white;
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +26,14 @@ class _HomeScreenState extends State<HomeScreen> {
           style: TextStyle(color: Colors.white),
         ),
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: _backgroundColor,
       body: Center(
         child: Square(
-          color: _color,
+          onTap: () {
+            setState(() {
+              _backgroundColor = _backgroundColor == Colors.white ? Colors.black : Colors.white;
+            });
+          },
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -46,11 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
         selectedItemColor: Colors.blue,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            _color = _color == Colors.red ? Colors.blue : Colors.red;
-          });
-        },
+        onPressed: () {},
         backgroundColor: Colors.blue,
         shape: const CircleBorder(),
         child: const Icon(
