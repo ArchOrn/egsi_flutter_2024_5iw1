@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_5iw1/red_square.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -8,16 +9,16 @@ class HomeScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: ListView.builder(
+        body: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            mainAxisExtent: 300,
+          ),
           itemBuilder: (context, index) {
-            return ListTile(
-              title: Text('First Name $index Last Name $index'),
-              subtitle: Text('$index, rue du Faubourg St Antoine'),
-              leading: const Icon(Icons.person),
-              onTap: () {},
-            );
+            return const RedSquare();
           },
-          itemCount: 100000,
         ),
       ),
     );
