@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_5iw1/red_circle.dart';
 import 'package:flutter_5iw1/red_square.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -7,78 +6,23 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          Expanded(
-            child: Column(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    color: Colors.pink,
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    width: double.infinity,
-                    color: Colors.orange,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Wrap(
-                        spacing: 8,
-                        runSpacing: 8,
-                        children: List.generate(24, (index) {
-                          return const RedCircle();
-                        }),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Stack(
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        height: double.infinity,
-                        color: Colors.amber,
-                        padding: const EdgeInsets.all(10),
-                        child: const Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            RedCircle(),
-                            SizedBox(width: 8),
-                            RedCircle(),
-                            Spacer(),
-                            RedCircle(),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        color: Colors.blue,
-                      ),
-                    ),
-                  ],
-                ),
-                // const Center(
-                //   child: RedSquare(),
-                // ),
-                const Align(
-                  alignment: Alignment.center,
-                  child: RedSquare(),
-                ),
-              ],
-            ),
-          )
-        ],
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: ListView(
+          children: [
+            const RedSquare(),
+            ...List.generate(100000, (index) {
+              return const Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  SizedBox(height: 10),
+                  RedSquare(),
+                ],
+              );
+            })
+          ],
+        ),
       ),
     );
   }
