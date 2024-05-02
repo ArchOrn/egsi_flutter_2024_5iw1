@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_5iw1/calendar/calendar_screen.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class CalendarScreen extends StatelessWidget {
+  static Future<void> navigateTo(BuildContext context) {
+    return Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) {
+        return const CalendarScreen();
+      },
+    ));
+  }
+
+  const CalendarScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,15 +22,17 @@ class HomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                'Home screen',
+                'Calendar screen',
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               ElevatedButton(
-                onPressed: () => CalendarScreen.navigateTo(context),
-                child: const Text('Go!'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('<- Back'),
               ),
             ],
           ),
