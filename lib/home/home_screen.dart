@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_5iw1/core/services/api_services.dart';
 
@@ -10,7 +11,7 @@ class HomeScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: FutureBuilder(
-          future: ApiServices.getUsers(),
+          future: ApiServices.getPhotos(),
           builder: (context, snapshot) {
             final isLoading = snapshot.connectionState == ConnectionState.waiting;
 
@@ -26,13 +27,29 @@ class HomeScreen extends StatelessWidget {
               }
 
               if (snapshot.hasData) {
-                return ListView.builder(
+                return GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                  ),
                   itemBuilder: (context, index) {
-                    final user = snapshot.data![index];
-                    return ListTile(
-                      leading: const Icon(Icons.person),
-                      title: Text(user.name),
-                      subtitle: Text(user.address),
+                    final photo = snapshot.data![index];
+                    return Stack(
+                      children: [
+                        Image.network(photo.url),
+                        Positioned(
+                          left: 0,
+                          right: 0,
+                          bottom: 0,
+                          child: Container(
+                            color: Colors.black.withOpacity(.2),
+                            child: Text(
+                              photo.title,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                            ),
+                          ),
+                        )
+                      ],
                     );
                   },
                   itemCount: snapshot.data!.length,
