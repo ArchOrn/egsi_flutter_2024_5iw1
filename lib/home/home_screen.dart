@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_5iw1/calendar/calendar_screen.dart';
+import 'package:flutter_5iw1/home/a.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,24 +21,33 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                'Home screen',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: TextField(
-                  controller: _controller,
-                ),
-              ),
-              const SizedBox(height: 10),
               ElevatedButton(
-                onPressed: () => CalendarScreen.navigateTo(context, username: _controller.text),
-                child: const Text('Go!'),
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) {
+                      return const A();
+                    },
+                  ));
+                },
+                child: const Text('Go to A'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/b');
+                },
+                child: const Text('Go to B'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/c', arguments: 'toto');
+                },
+                child: const Text('Go to C'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/cdgksndjkgnksdngjknsdg');
+                },
+                child: const Text('Go to 404'),
               ),
             ],
           ),
