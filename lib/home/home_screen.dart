@@ -39,7 +39,11 @@ class HomeScreen extends StatelessWidget {
                         width: 60,
                       ),
                       title: Text(product.title),
-                      subtitle: Text(product.description),
+                      subtitle: Text(
+                        product.description,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     );
                   },
                   itemCount: state.products.length,
