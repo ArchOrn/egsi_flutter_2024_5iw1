@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_5iw1/home/blocs/home_bloc.dart';
+import 'package:flutter_5iw1/product/product_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -44,6 +45,7 @@ class HomeScreen extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
+                      onTap: () => ProductScreen.navigateTo(context, id: product.id),
                     );
                   },
                   itemCount: state.products.length,
