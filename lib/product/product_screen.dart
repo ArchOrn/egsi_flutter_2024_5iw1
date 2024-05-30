@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_5iw1/cart/blocs/cart_bloc.dart';
 import 'package:flutter_5iw1/product/blocs/product_bloc.dart';
 import 'package:flutter_5iw1/shared/widgets/cart_floating_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -78,9 +79,9 @@ class ProductScreen extends StatelessWidget {
                                 const SizedBox(height: 10),
                                 ElevatedButton(
                                   onPressed: () {
-                                    Navigator.of(context).pop(true);
+                                    context.read<CartBloc>().add(CartItemAdded(product: product));
                                   },
-                                  child: const Text('Click me!'),
+                                  child: const Text('Add to cart'),
                                 )
                               ],
                             ),

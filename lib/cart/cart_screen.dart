@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_5iw1/cart/blocs/cart_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartScreen extends StatelessWidget {
   static const String routeName = '/cart';
 
   static navigateTo(BuildContext context) {
     Navigator.of(context).pushNamed(routeName);
+    context.read<CartBloc>().add(CartItemsLoaded());
   }
 
   const CartScreen({super.key});
@@ -17,10 +20,34 @@ class CartScreen extends StatelessWidget {
           title: const Text('Cart'),
         ),
         backgroundColor: Colors.white,
+        body: BlocBuilder<CartBloc, CartState>(
+          builder: (context, state) {
+            return ListView.builder(
+              itemBuilder: (context, index) {
+                final item = state.items[index];
+                return Dismissible(
+                  key: Key(item.product.id.toString()),
+                  onDismissed: (direction) => context.read<CartBloc>().add(CartItemRemoved(product: item.product)),
+                  child: ListTile(
+                    leading: Image.network(item.product.imageUrl),
+                    title: Text(item.product.title),
+                    subtitle: Text(
+                      item.product.description,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    trailing: Text(item.quantity > 1 ? 'x${item.quantity}' : ''),
+                  ),
+                );
+              },
+              itemCount: state.items.length,
+            );
+          },
+        ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.red.shade100,
           onPressed: () {
-            // TODO
+            context.read<CartBloc>().add(CartCleared());
           },
           child: const Icon(Icons.remove_shopping_cart),
         ),

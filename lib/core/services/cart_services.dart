@@ -17,6 +17,10 @@ class CartServices {
     _cartLines.addAll(data.map((e) => CartLine.fromJson(json.decode(e))));
   }
 
+  static Future<List<CartLine>> getCartItems() async {
+    return _cartLines;
+  }
+
   static Future<List<CartLine>> addToCart({required Product product, int quantity = 1}) async {
     final cartLine = _cartLines.firstOrNullWhere((line) => line.product.id == product.id);
     if (cartLine != null) {
